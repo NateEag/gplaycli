@@ -25,6 +25,7 @@ import logging
 import argparse
 import requests
 import configparser
+import subprocess
 
 from gpapi.googleplay import GooglePlayAPI, LoginError, RequestError
 from google.protobuf.message import DecodeError
@@ -161,6 +162,16 @@ class GPlaycli:
 				pass
 			else:
 				raise TypeError("Token string and GSFID have to be passed at the same time.")
+
+		# FIXME Very brittle code for POC purposes, just to see if it'll work
+		if args.username_cmd is not None:
+			self.token_enable = None
+			self.gmail_address = subprocess.check_output(args.username_cmd.split(' ')).decode('utf-8').strip()
+			print(self.gmail_address)
+
+		if args.password_cmd is not None:
+			self.token_enable = None
+			self.gmail_password = subprocess.check_output(args.password_cmd.split(' ')).decode('utf-8').strip()
 
 		if self.logging_enable:
 			self.success_logfile = "apps_downloaded.log"
@@ -627,6 +638,9 @@ def main():
 	parser.add_argument('-c',  '--config',				help="Use a different config file than gplaycli.conf", metavar="CONF_FILE", nargs=1)
 	parser.add_argument('-p',  '--progress',			help="Prompt a progress bar while downloading packages", action='store_true')
 	parser.add_argument('-L',  '--log',					help="Enable logging of apps status in separate logging files", action='store_true', default=False)
+	# TODO Document these options usefully if I get them working.
+	parser.add_argument('-U', '--username-cmd',             help="Command to get the username")
+	parser.add_argument('-pw', '--password-cmd',             help="Command to get the password")
 
 	if len(sys.argv) < 2:
 		sys.argv.append("-h")
