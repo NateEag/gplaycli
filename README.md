@@ -48,16 +48,16 @@ There are 2 ways of authenticating: token (default) or credentials.
 
 Token
 -----
-By default, gplaycli fetches a token from a token dispenser server located at https://matlink.fr/token/ to login in Google Play. If you want to use another token dispenser server, change its URL in the configuration file (depends on the way you installed it). 
+By default, gplaycli fetches a token from a token dispenser server located at https://matlink.fr/token/ to login in Google Play. If you want to use another token dispenser server, change its URL in the configuration file (depends on the way you installed it).
 
 Credentials
 -----------
 If you want to use your own Google credentials, put
-	
+
 	token=False
 
 in the config file and type in your credentials in
-	
+
 	gmail_address=
 	gmail_password=
 
