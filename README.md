@@ -77,3 +77,17 @@ Pip
 Debian installation
 --------------------
 Releases are available here https://github.com/matlink/gplaycli/releases/ as debian packages. Or click this link for automated builds ![Debian package](https://github.com/matlink/gplaycli/workflows/Debian%20package/badge.svg)
+
+My Dev Setup Hacks
+------------------
+
+I generated a local virtualenv like this:
+
+    python -m venv virtualenv
+    source virtualenv/bin/activate
+    pip install -r requirements.txt
+
+and with the virtualenv active I seem to be able to run the command like this
+from the project's basedir, which makes sense:
+
+    python -m gplaycli
